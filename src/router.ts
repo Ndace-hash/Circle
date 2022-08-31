@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Messages from "./pages/Messages.vue";
 import Feeds from "./pages/Feeds.vue";
+import Profile from "./pages/Profile.vue";
+import ChatRoom from "./pages/ChatRoom.vue";
 
 const routes = [
   {
@@ -16,7 +18,12 @@ const routes = [
   {
     name: "profile",
     path: "/profile",
-    component: Messages,
+    component: Profile,
+  },
+  {
+    name: "chat",
+    path: "/chat",
+    component: ChatRoom,
   },
   {
     path: "/",
@@ -27,4 +34,11 @@ const routes = [
 export default createRouter({
   history: createWebHistory(),
   routes,
+  scrollBehavior(to, from, savedPostion) {
+    if (savedPostion) return savedPostion;
+
+    return {
+      top: 0,
+    };
+  },
 });

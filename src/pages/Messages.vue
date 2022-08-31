@@ -8,6 +8,15 @@
     <Chat />
     <Chat />
     <Chat />
+    <Chat />
+    <Chat />
+    <Chat />
+    <Chat />
+    <Chat />
+    <Chat />
+    <Chat />
+    <Chat />
+    <Chat />
   </div>
 </template>
 

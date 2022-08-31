@@ -1,7 +1,7 @@
 <template>
   <article class="py-4 px-2 border-b-2">
-    <div class="description flex gap-4 items-center">
-      <div class="img-wrapper overflow-hidden rounded-full w-16 h-16">
+    <div class="description flex gap-4 items-center my-2">
+      <div class="img-wrapper overflow-hidden rounded-full w-10 h-10">
         <img src="../assets/profile.jpg" alt="profile" class="w-full h-full" />
       </div>
 
