@@ -3,7 +3,10 @@
     <div
       class="bg-slate-400 flex rounded-b-lg sticky top-0 left-0 w-full justify-between m-0 z-10 px-3 py-2 items-center shadow-xl"
     >
-      <button class="bg-transparent text-white text-xl p-0" @click="goBack">
+      <button
+        class="bg-transparent text-white text-xl p-0"
+        @click="$router.back()"
+      >
         &LeftArrow;
       </button>
       <button class="bg-transparent flex flex-col gap-1 p-0">
@@ -30,7 +33,10 @@
         following <span class="font-semibold uppercase text-base">184</span>
       </h4>
     </div>
-    <button class="bg-slate-400 py-1 text-white">Follow</button>
+    <div class="flex gap-4 mx-auto my-2">
+      <button class="bg-slate-400 py-1 text-white">Follow</button>
+      <button class="bg-slate-300 py-1 text-white">Message</button>
+    </div>
 
     <section>
       <FeedCard />
@@ -48,7 +54,6 @@
 
 <script setup lang="ts">
 import FeedCard from "../components/FeedCard.vue";
-import { goBack } from "../composables/useRoute";
 </script>
 
 <style scoped></style>

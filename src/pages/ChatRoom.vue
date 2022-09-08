@@ -1,9 +1,12 @@
 <template>
-  <div class="h-screen flex flex-col">
+  <div class="h-screen grid grid-rows-chat">
     <div
       class="bg-slate-400 flex rounded-b-lg sticky top-0 left-0 w-full gap-2 m-0 z-10 px-3 py-1 items-center shadow-xl"
     >
-      <button class="bg-transparent text-white text-xl p-0" @click="goBack">
+      <button
+        class="bg-transparent text-white text-xl p-0"
+        @click="$router.back()"
+      >
         &LeftArrow;
       </button>
       <div class="flex items-center gap-2">
@@ -26,7 +29,12 @@
         <span class="w-[5px] h-[5px] rounded-full border-2 border-white"></span>
       </button>
     </div>
-    <section class="flex flex-col justify-end flex-auto">hello</section>
+    <section
+      class="block overflow-x-hidden overflow-y-auto h-full"
+      ref="chatDisplay"
+    >
+      <MessageBox v-for="text in messagesArray" :text="text" />
+    </section>
     <div
       class="w-full sticky left-0 py-2 bottom-0 flex bg-slate-400 rounded-t-md items-center px-1 gap-1 justify-self-end"
     >
@@ -34,9 +42,12 @@
         type="text"
         placeholder="Type message"
         class="w-11/12 bg-gray-300 rounded-xl py-2 px-3 overflow-y-auto overflow-x-hidden focus:outline-none"
+        v-model="message"
+        autofocus
       />
       <button
         class="bg-slate-500 text-white p-0 w-8 h-8 rounded-full flex items-center justify-center"
+        @click.prevent="sendMessage"
       >
         &RightArrow;
       </button>
@@ -45,7 +56,26 @@
 </template>
 
 <script setup lang="ts">
-import { goBack } from "../composables/useRoute";
+import { ref, onMounted } from "vue";
+import MessageBox from "../components/MessageBox.vue";
+import { Message } from "../composables/interface";
+const chatDisplay = ref<HTMLDivElement | null>(null);
+const message = ref("");
+const messagesArray = ref<Message[]>([]);
+const sendMessage = () => {
+  if (!message.value) return;
+  messagesArray.value.push({
+    // time: new Date().toLocaleTimeString(),
+    time: new Date().toLocaleTimeString(),
+    content: message.value,
+  });
+  message.value = "";
+};
+
+onMounted(() => {
+  if (chatDisplay.value)
+    chatDisplay.value.scroll({ top: chatDisplay.value.scrollHeight });
+});
 </script>
 
 <style scoped></style>

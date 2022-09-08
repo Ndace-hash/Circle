@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./index.html", "./src/**/*.{vue,js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      gridTemplateRows: {
+        chat: "auto minmax(300px,1fr) auto",
+      },
+    },
   },
   plugins: [],
 };
