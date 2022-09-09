@@ -4,10 +4,10 @@
       class="bg-slate-400 flex rounded-b-lg sticky top-0 left-0 w-full gap-2 m-0 z-10 px-3 py-1 items-center shadow-xl"
     >
       <button
-        class="bg-transparent text-white text-xl p-0"
+        class="bg-transparent text-brand text-xl p-0"
         @click="$router.back()"
       >
-        &LeftArrow;
+        <i class="fa-solid fa-chevron-left"></i>
       </button>
       <div class="flex items-center gap-2">
         <div
@@ -20,13 +20,13 @@
           />
         </div>
         <div>
-          <h3 class="text-white lowercase font-semibold text-xl">Trevor</h3>
+          <h3 class="text-brand lowercase font-semibold text-xl">Trevor</h3>
         </div>
       </div>
       <button class="bg-transparent flex flex-col gap-1 p-0 absolute right-5">
-        <span class="w-[5px] h-[5px] rounded-full border-2 border-white"></span>
-        <span class="w-[5px] h-[5px] rounded-full border-2 border-white"></span>
-        <span class="w-[5px] h-[5px] rounded-full border-2 border-white"></span>
+        <span class="w-[5px] h-[5px] rounded-full border-2 border-brand"></span>
+        <span class="w-[5px] h-[5px] rounded-full border-2 border-brand"></span>
+        <span class="w-[5px] h-[5px] rounded-full border-2 border-brand"></span>
       </button>
     </div>
     <section
@@ -36,20 +36,20 @@
       <MessageBox v-for="text in messagesArray" :text="text" />
     </section>
     <div
-      class="w-full sticky left-0 py-2 bottom-0 flex bg-slate-400 rounded-t-md items-center px-1 gap-1 justify-self-end"
+      class="w-full sticky left-0 py-2 bottom-0 flex bg-mid rounded-t-md items-center px-1 gap-1 justify-self-end"
     >
       <textarea
         type="text"
         placeholder="Type message"
-        class="w-11/12 bg-gray-300 rounded-xl py-2 px-3 overflow-y-auto overflow-x-hidden focus:outline-none"
+        class="w-11/12 bg-gray-300 text-dark rounded-xl py-2 px-3 overflow-y-auto overflow-x-hidden focus:outline-none"
         v-model="message"
         autofocus
       />
       <button
-        class="bg-slate-500 text-white p-0 w-8 h-8 rounded-full flex items-center justify-center"
+        class="bg-brand text-mid p-4 rounded-lg h-full text-center"
         @click.prevent="sendMessage"
       >
-        &RightArrow;
+        <i class="fa-solid fa-paper-plane text-2xl"></i>
       </button>
     </div>
   </div>

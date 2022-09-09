@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-5/6 md:w-3/6 py-1 px-3 flex gap-0 flex-col flex-wrap bg-slate-400 my-2 rounded-lg rounded-bl-none mx-2 text-white"
+    class="w-5/6 md:w-3/6 py-1 px-3 flex gap-0 flex-col flex-wrap bg-dark my-2 rounded-lg rounded-bl-none mx-2 text-white"
   >
     <div class="flex m-0 justify-between items-center w-full p-0">
       <span class="font-semibold my-2 text-xl">chika</span>

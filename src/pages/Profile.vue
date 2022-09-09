@@ -1,18 +1,23 @@
 <template>
-  <section class="flex flex-col items-center w-full pt pb-4 relative m-0">
+  <section
+    class="bg-light text-dark flex flex-col items-center w-full pt pb-4 relative m-0"
+  >
     <div
-      class="bg-slate-400 flex rounded-b-lg sticky top-0 left-0 w-full justify-between m-0 z-10 px-3 py-2 items-center shadow-xl"
+      class="bg-light flex rounded-b-lg sticky top-0 left-0 w-full justify-between m-0 z-10 px-3 py-2 items-center shadow-xl"
     >
-      <button
-        class="bg-transparent text-white text-xl p-0"
-        @click="$router.back()"
-      >
-        &LeftArrow;
-      </button>
+      <div class="flex gap-3 items-center">
+        <button
+          class="bg-transparent text-brand text-xl p-0"
+          @click="$router.back()"
+        >
+          <i class="fa-solid fa-chevron-left font-bold"></i>
+        </button>
+        <h2 class="text-xl capitalize font-semibold">{{ $route.name }}</h2>
+      </div>
       <button class="bg-transparent flex flex-col gap-1 p-0">
-        <span class="w-[5px] h-[5px] rounded-full border-2 border-white"></span>
-        <span class="w-[5px] h-[5px] rounded-full border-2 border-white"></span>
-        <span class="w-[5px] h-[5px] rounded-full border-2 border-white"></span>
+        <span class="w-[5px] h-[5px] rounded-full border-2 border-brand"></span>
+        <span class="w-[5px] h-[5px] rounded-full border-2 border-brand"></span>
+        <span class="w-[5px] h-[5px] rounded-full border-2 border-brand"></span>
       </button>
     </div>
     <div
@@ -30,15 +35,15 @@
         followers <span class="font-semibold uppercase text-base">3k</span>
       </h4>
       <h4 class="capitalize text-sm font-[500]">
-        following <span class="font-semibold uppercase text-base">184</span>
+        following <span class="font-semibold uppercase text-base">300</span>
       </h4>
     </div>
     <div class="flex gap-4 mx-auto my-2">
-      <button class="bg-slate-400 py-1 text-white">Follow</button>
-      <button class="bg-slate-300 py-1 text-white">Message</button>
+      <button class="bg-brand py-1 text-white">Follow</button>
+      <button class="bg-brand py-1 text-white">Message</button>
     </div>
 
-    <section>
+    <!-- <section class="mt-4">
       <FeedCard />
       <FeedCard />
       <FeedCard />
@@ -48,7 +53,7 @@
       <FeedCard />
       <FeedCard />
       <FeedCard />
-    </section>
+    </section> -->
   </section>
 </template>
 

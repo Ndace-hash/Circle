@@ -1,5 +1,5 @@
 <template>
-  <article class="py-4 px-2 border-b-2">
+  <article class="py-4 px-2 border-y border-mid">
     <div class="description flex gap-4 items-center my-2">
       <div class="img-wrapper overflow-hidden rounded-full w-10 h-10">
         <img src="../assets/profile.jpg" alt="profile" class="w-full h-full" />
@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="post-content p-1">
-      <p class="text-base">
+      <p class="text-base whitespace-pre-line">
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero expedita
         voluptatum, autem at voluptates facilis voluptas vel omnis voluptate
         corporis qui architecto delectus blanditiis porro ducimus similique?
@@ -23,8 +23,16 @@
       </p>
     </div>
     <div class="flex justify-around items-center">
-      <button class="capitalize font-semibold border-2">like 2.4k</button>
-      <button class="capitalize font-semibold border-2">share</button>
+      <button
+        class="capitalize font-semibold border-2 text-dark bg-transparent"
+      >
+        <i class="fa-solid fa-heart"></i> 2.4k
+      </button>
+      <button
+        class="capitalize font-semibold border-2 text-dark bg-transparent"
+      >
+        <i class="fa-solid fa-comment"></i> 305
+      </button>
     </div>
   </article>
 </template>
