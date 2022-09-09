@@ -1,7 +1,7 @@
 <template>
   <div class="h-screen grid grid-rows-chat">
     <div
-      class="bg-slate-400 flex rounded-b-lg sticky top-0 left-0 w-full gap-2 m-0 z-10 px-3 py-1 items-center shadow-xl"
+      class="bg-light flex rounded-b-lg w-full gap-2 m-0 z-10 px-3 py-1 items-center shadow-xl"
     >
       <button
         class="bg-transparent text-brand text-xl p-0"
@@ -29,14 +29,12 @@
         <span class="w-[5px] h-[5px] rounded-full border-2 border-brand"></span>
       </button>
     </div>
-    <section
-      class="block overflow-x-hidden overflow-y-auto h-full"
-      ref="chatDisplay"
-    >
-      <MessageBox v-for="text in messagesArray" :text="text" />
+    <section class="flex flex-col overflow-x-hidden overflow-y-auto h-full">
+      <MessageBox v-for="text in conversation.messages" :text="text" />
+      <div></div>
     </section>
     <div
-      class="w-full sticky left-0 py-2 bottom-0 flex bg-mid rounded-t-md items-center px-1 gap-1 justify-self-end"
+      class="w-full py-2 flex bg-mid rounded-t-md items-center px-1 gap-1 justify-self-end"
     >
       <textarea
         type="text"
@@ -56,26 +54,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import MessageBox from "../components/MessageBox.vue";
-import { Message } from "../composables/interface";
-const chatDisplay = ref<HTMLDivElement | null>(null);
+import { useMessages } from "../store/useMessages";
+import { useAuthUser } from "../store/authUser";
+
+const conversation = useMessages();
+const user = useAuthUser();
+
 const message = ref("");
-const messagesArray = ref<Message[]>([]);
 const sendMessage = () => {
   if (!message.value) return;
-  messagesArray.value.push({
+  conversation.sendMessages({
     // time: new Date().toLocaleTimeString(),
+    sender_id: user.currentUser,
     time: new Date().toLocaleTimeString(),
     content: message.value,
   });
   message.value = "";
 };
-
-onMounted(() => {
-  if (chatDisplay.value)
-    chatDisplay.value.scroll({ top: chatDisplay.value.scrollHeight });
-});
 </script>
-
-<style scoped></style>

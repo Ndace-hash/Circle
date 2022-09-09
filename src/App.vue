@@ -1,5 +1,8 @@
 <template>
-  <section class="sticky top-0 shadow-lg z-50 rounded-b-md overflow-hidden">
+  <section
+    class="sticky top-0 shadow-lg z-50 rounded-b-md overflow-hidden"
+    v-if="$route.name === 'messages'"
+  >
     <header
       class="flex items-center justify-between bg-light py-2 px-2 lg:px-8"
     >
@@ -40,16 +43,6 @@ import { ref, watch } from "vue";
 const router = useRouter();
 const route = useRoute();
 const loggedIn = ref(true);
-const currentRoute = ref(route.name);
-
-const watchRoute = () => {
-  if (route.name == "messages" || route.name == "feeds") {
-    return true;
-  } else {
-    return false;
-  }
-};
-const showTabs = ref(watchRoute());
 
 const signIn = () => {
   router.push({
