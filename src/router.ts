@@ -3,6 +3,8 @@ import Messages from "./pages/Messages.vue";
 // import Feeds from "./pages/Feeds.vue";
 import Profile from "./pages/Profile.vue";
 import ChatRoom from "./pages/ChatRoom.vue";
+import LoginScreen from "./pages/LoginScreen.vue";
+import { useAuthUser } from "./store/authUser";
 
 const routes = [
   {
@@ -26,12 +28,17 @@ const routes = [
     component: ChatRoom,
   },
   {
+    name: "login",
+    path: "/login",
+    component: LoginScreen,
+  },
+  {
     path: "/",
     redirect: "/messages",
   },
 ];
 
-export default createRouter({
+const Router = createRouter({
   history: createWebHistory(),
   routes,
   scrollBehavior(to, from, savedPostion) {
@@ -42,3 +49,11 @@ export default createRouter({
     };
   },
 });
+
+Router.beforeEach((to, from, next) => {
+  const user = useAuthUser();
+  if (user.currentUser == null && to.name !== "login") next({ name: "login" });
+  else next();
+});
+
+export default Router;

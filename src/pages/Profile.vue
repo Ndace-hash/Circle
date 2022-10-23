@@ -24,12 +24,14 @@
       class="img-wrapper overflow-hidden w-24 h-24 rounded-full border-4 my-4"
     >
       <img
-        src="../assets/profile.jpg"
+        :src="user.currentUser?.user_metadata.picture"
         alt="Your Profile image"
         class="w-full h-full"
       />
     </div>
-    <h3 class="lowercase font-semibold text-center text-base">@Filipe</h3>
+    <h3 class="lowercase font-semibold text-center text-base">
+      @{{ (user.currentUser?.user_metadata.name).replace(" ", "") }}
+    </h3>
     <div class="flex gap-4 mx-auto my-2">
       <h4 class="capitalize text-sm font-[500]">
         followers <span class="font-semibold uppercase text-base">3k</span>
@@ -59,6 +61,8 @@
 
 <script setup lang="ts">
 import FeedCard from "../components/FeedCard.vue";
+import { useAuthUser } from "../store/authUser";
+const user = useAuthUser();
 </script>
 
 <style scoped></style>
