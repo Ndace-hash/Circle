@@ -4,6 +4,7 @@ import Messages from "./pages/Messages.vue";
 import Profile from "./pages/Profile.vue";
 import ChatRoom from "./pages/ChatRoom.vue";
 import LoginScreen from "./pages/LoginScreen.vue";
+import Register from "./pages/Register.vue";
 import { useAuthUser } from "./store/authUser";
 
 const routes = [
@@ -31,6 +32,11 @@ const routes = [
     name: "login",
     path: "/login",
     component: LoginScreen,
+  },
+  {
+    name: "register",
+    path: "/register",
+    component: Register,
   },
   {
     path: "/",

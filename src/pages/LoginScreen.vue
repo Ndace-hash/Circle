@@ -1,7 +1,5 @@
 <template>
-  <div class="h-screen flex items-center justify-center">
-    <div class="form-inner flex flex-col gap-6 items-center">
-      <!-- <form
+  <!-- <form
         @submit.prevent="signInWithUsername"
         class="flex flex-col items-center gap-3"
       >
@@ -25,21 +23,72 @@
           class="bg-brand py-2 px-8 rounded-md text-light text-xl"
         />
       </form> -->
-      <button
+  <div class="flex items-center justify-center h-screen bg-dark w-full">
+    <form
+      class="bg-white p-12 rounded-lg shadow-xl w-[90%] md:w-2/5"
+      @submit.prevent="signIn"
+    >
+      <div class="form-group mb-2">
+        <label
+          for="email"
+          class="block font-semibold text-lg capitalize my-1 text-dark"
+          >Email</label
+        >
+        <input
+          type="email"
+          placeholder="email address"
+          class="border-2 border-dark py-1 px-2 rounded-md shadow-md w-full block focus:outline-none"
+          required
+          v-model="email"
+        />
+      </div>
+      <div class="form-group mb-2">
+        <label
+          for="password"
+          class="block font-semibold text-lg capitalize my-1 text-dark"
+          >Password</label
+        >
+        <input
+          type="password"
+          placeholder="enter a strong password"
+          class="border-2 border-dark py-1 px-2 rounded-md shadow-md w-full block focus:outline-none"
+          required
+          v-model="password"
+        />
+      </div>
+      <input
+        type="submit"
+        value="login"
+        class="bg-brand py-1 px-8 my-2 rounded-md text-white font-semibold capitalize focus:outline-none"
+      />
+
+      <p class="text-sm mt-3">
+        New here?
+        <router-link
+          to="/register"
+          class="underline font-semibold capitalize text-brand"
+          >register</router-link
+        >
+      </p>
+    </form>
+  </div>
+
+  <!-- <button
         class="bg-[rgba(0,150,255,40)] text-light font-semibold flex items-center gap-2 w-max"
         @click.prevent="signInWithGoogle"
       >
         <i class="fa-brands fa-google text-2xl"></i> Login with Google
-      </button>
-    </div>
-  </div>
+      </button> -->
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useAuthUser } from "../store/authUser";
 import { useRouter } from "vue-router";
 import { supabase } from "../config/supabase";
+
+const email = ref("");
+const password = ref("");
 
 const router = useRouter();
 const username = ref("");
@@ -51,11 +100,14 @@ const signInWithUsername = () => {
 
     return;
   }
-  // AuthUser.currentUser = username.value;
   router.push({
     name: "messages",
   });
 };
+onMounted(() => {
+  email.value = AuthUser.loginDetails.email;
+  password.value = AuthUser.loginDetails.password;
+});
 
 const signInWithGoogle = async () => {
   const { error: authError, user } = await supabase.auth.signIn({
@@ -65,6 +117,20 @@ const signInWithGoogle = async () => {
   if (user) {
     router.push({ path: "/" });
   }
+};
 
+const signIn = async () => {
+  const { error, user } = await supabase.auth.signIn({
+    email: email.value,
+    password: password.value,
+  });
+  if (error) {
+    throw error;
+    return;
+  }
+  AuthUser.currentUser = user;
+  router.push({ name: "messages" });
+  AuthUser.loginDetails.email = "";
+  AuthUser.loginDetails.password = "";
 };
 </script>
